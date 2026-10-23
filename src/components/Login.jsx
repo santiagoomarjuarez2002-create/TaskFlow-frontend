@@ -8,20 +8,30 @@ import Form from 'react-bootstrap/Form'
 
 function Login({ onIniciarSesion }) {
   const [error, setError] = useState('')
+  const [cargando, setCargando] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
     const datos = Object.fromEntries(new FormData(event.currentTarget))
-    const iniciado = onIniciarSesion(datos.email, datos.password)
+    setError('')
+    setCargando(true)
 
-    if (!iniciado) {
-      setError('El correo o la contraseña no son correctos.')
-      return
+    try {
+      const iniciado = await onIniciarSesion(datos.email, datos.password)
+
+      if (!iniciado) {
+        setError('El correo o la contraseña no son correctos.')
+        return
+      }
+
+      navigate(location.state?.from?.pathname || '/tareas', { replace: true })
+    } catch {
+      setError('No se pudo validar la cuenta en este navegador.')
+    } finally {
+      setCargando(false)
     }
-
-    navigate(location.state?.from?.pathname || '/tareas', { replace: true })
   }
 
   return (
@@ -46,7 +56,9 @@ function Login({ onIniciarSesion }) {
                   required
                 />
               </Form.Group>
-              <Button type="submit" className="w-100">Ingresar</Button>
+              <Button type="submit" className="w-100" disabled={cargando}>
+                {cargando ? 'Ingresando...' : 'Ingresar'}
+              </Button>
             </Form>
             <p className="texto-alternativo">
               ¿No tenés una cuenta? <Link to="/registro">Registrate</Link>

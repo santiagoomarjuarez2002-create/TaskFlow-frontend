@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
 
-function Inicio({ titulo, descripcion }) {
+function Inicio({ titulo, descripcion, usuario }) {
   return (
     <section id="inicio" className="presentacion text-center">
       <Container>
@@ -10,9 +10,16 @@ function Inicio({ titulo, descripcion }) {
 
         <p className="lead mb-4">{descripcion}</p>
 
-        <Button as={Link} to="/tareas" variant="primary" size="lg">
-          Ver mis tareas
-        </Button>
+        {!usuario && (
+          <div className="acciones-inicio">
+            <Button as={Link} to="/login" variant="primary" size="lg">
+              Iniciar sesión
+            </Button>
+            <Button as={Link} to="/registro" variant="outline-light" size="lg">
+              Crear cuenta
+            </Button>
+          </div>
+        )}
       </Container>
     </section>
   )

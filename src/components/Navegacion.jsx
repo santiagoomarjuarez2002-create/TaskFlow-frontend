@@ -42,8 +42,12 @@ function Navegacion({ usuario, onCerrarSesion }) {
                 </>
               ) : (
                 <>
-                  <Nav.Link as={Link} to="/login">Ingresar</Nav.Link>
-                  <Nav.Link as={Link} to="/registro">Registrarse</Nav.Link>
+                  <Button as={Link} to="/login" variant="outline-light" size="sm">
+                    Ingresar
+                  </Button>
+                  <Button as={Link} to="/registro" size="sm">
+                    Registro
+                  </Button>
                 </>
               )}
             </Nav>
