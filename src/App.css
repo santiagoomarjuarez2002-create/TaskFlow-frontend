@@ -1,0 +1,68 @@
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px 7%;
+  background-color: #100d16;
+}
+
+.encabezado h1 {
+  margin: 0;
+  color: #a78bfa;
+}
+
+.encabezado nav {
+  display: flex;
+  gap: 20px;
+}
+
+.encabezado a {
+  text-decoration: none;
+}
+
+.encabezado a:hover {
+  text-decoration: underline;
+}
+
+.presentacion {
+  padding: 70px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #29133d, #100d16);
+}
+
+.presentacion h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.presentacion p {
+  margin-bottom: 30px;
+  color: #b9b1c6;
+}
+
+.boton {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 8px;
+  background-color: #7c3aed;
+  color: white;
+  text-decoration: none;
+}
+
+.boton:hover {
+  background-color: #6d28d9;
+}
+
+.seccion-tareas {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.pie-pagina {
+  padding: 20px;
+  text-align: center;
+  background-color: #100d16;
+  color: #b9b1c6;
+}
