@@ -1,19 +1,77 @@
-* {
+:root {
+  color-scheme: light;
+  font-family: Arial, sans-serif;
+  --color-principal: #5b4bdb;
+  --color-secundario: #4033a8;
+  --color-fondo: #f4f5fb;
+  --color-tarjeta: #ffffff;
+  --color-texto: #25263a;
+  --color-texto-suave: #686b80;
+  --color-borde: #e1e3ee;
+  --color-pendiente: #fff0d6;
+  --color-completada: #d9f7e8;
+  --espaciado: 1rem;
+
+  /* Alias usados por la hoja de estilos de los componentes React. */
+  --tf-bg: var(--color-fondo);
+  --tf-surface: var(--color-tarjeta);
+  --tf-surface-raised: var(--color-tarjeta);
+  --tf-border: var(--color-borde);
+  --tf-text: var(--color-texto);
+  --tf-muted: var(--color-texto-suave);
+  --tf-accent: var(--color-principal);
+  --tf-accent-strong: var(--color-secundario);
+
+  --bs-primary: var(--color-principal);
+  --bs-primary-rgb: 91, 75, 219;
+  --bs-body-bg: var(--color-fondo);
+  --bs-body-color: var(--color-texto);
+  --bs-secondary-color: var(--color-texto-suave);
+  --bs-border-color: var(--color-borde);
+  --bs-link-color: var(--color-secundario);
+  --bs-link-hover-color: var(--color-principal);
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
+  min-width: 320px;
+  min-height: 100%;
   scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
   min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
   font-family: Arial, sans-serif;
-  background-color: #09090d;
-  color: #f2eef8;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 a {
-  color: inherit;
-} 
+  color: var(--color-secundario);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-principal);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}

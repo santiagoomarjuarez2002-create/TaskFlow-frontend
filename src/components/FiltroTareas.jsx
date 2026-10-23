@@ -9,7 +9,7 @@ const filtros = [
 
 function FiltroTareas({ filtro, onCambiarFiltro }) {
   return (
-    <ButtonGroup aria-label="Filtrar tareas">
+    <ButtonGroup aria-label="Filtrar tareas" className="filtros-tareas">
       {filtros.map((opcion) => (
         <Button
           key={opcion.valor}

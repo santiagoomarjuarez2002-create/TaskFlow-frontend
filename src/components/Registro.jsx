@@ -8,23 +8,33 @@ import Form from 'react-bootstrap/Form'
 
 function Registro({ onRegistrar }) {
   const [error, setError] = useState('')
+  const [cargando, setCargando] = useState(false)
   const navigate = useNavigate()
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
     const datos = Object.fromEntries(new FormData(event.currentTarget))
-    const registrado = onRegistrar({
-      nombre: datos.nombre.trim(),
-      email: datos.email.trim(),
-      password: datos.password,
-    })
+    setError('')
+    setCargando(true)
 
-    if (!registrado) {
-      setError('Ya existe una cuenta con ese correo electrónico.')
-      return
+    try {
+      const registrado = await onRegistrar({
+        nombre: datos.nombre.trim(),
+        email: datos.email.trim(),
+        password: datos.password,
+      })
+
+      if (!registrado) {
+        setError('Ya existe una cuenta con ese correo electrónico.')
+        return
+      }
+
+      navigate('/tareas', { replace: true })
+    } catch {
+      setError('No se pudo guardar la cuenta en este navegador.')
+    } finally {
+      setCargando(false)
     }
-
-    navigate('/tareas', { replace: true })
   }
 
   return (
@@ -54,7 +64,9 @@ function Registro({ onRegistrar }) {
                   required
                 />
               </Form.Group>
-              <Button type="submit" className="w-100">Registrarme</Button>
+              <Button type="submit" className="w-100" disabled={cargando}>
+                {cargando ? 'Guardando...' : 'Registrarme'}
+              </Button>
             </Form>
             <p className="texto-alternativo">
               ¿Ya tenés una cuenta? <Link to="/login">Ingresá</Link>
