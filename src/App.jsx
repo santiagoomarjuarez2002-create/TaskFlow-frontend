@@ -1,37 +1,28 @@
+import { BrowserRouter } from 'react-router-dom'
+import Navegacion from './components/Navegacion'
+import PiePagina from './components/PiePagina'
+import Rutas from './components/routes/Rutas'
+import useAutenticacion from './hooks/useAutenticacion'
 import './App.css'
 
-function App() {
-  return (
-    <>
-      <header className="encabezado">
-        <h1>TaskFlow</h1>
+function Aplicacion() {
+  const { usuario, registrar, iniciarSesion, cerrarSesion } = useAutenticacion()
 
-        <nav>
-          <a href="#inicio">Inicio</a>
-          <a href="#tareas">Mis tareas</a>
-        </nav>
-      </header>
+  return (
+    <BrowserRouter>
+      <Navegacion usuario={usuario} onCerrarSesion={cerrarSesion} />
 
       <main>
-        <section id="inicio" className="presentacion">
-          <h2>Bienvenido a TaskFlow</h2>
-          <p>Organizá tus tareas de manera fácil y rápida.</p>
-          <a href="#tareas" className="boton">
-            Ver mis tareas
-          </a>
-        </section>
-
-        <section id="tareas" className="seccion-tareas">
-          <h2>Mis tareas</h2>
-          <p>Acá vamos a mostrar y administrar tus tareas.</p>
-        </section>
+        <Rutas
+          usuario={usuario}
+          registrar={registrar}
+          iniciarSesion={iniciarSesion}
+        />
       </main>
 
-      <footer className="pie-pagina">
-        <p>TaskFlow - Proyecto de Programación Web</p>
-      </footer>
-    </>
+      <PiePagina nombreProyecto="TaskFlow" />
+    </BrowserRouter>
   )
 }
 
-export default App
+export default Aplicacion
